@@ -57,6 +57,3 @@ C:\Users\Hp\Desktop>python probe_test.py
 [2025-09-23 12:25:36] Logging: stored order_id hash=59fdcc0312f13ba ; dropped PII (names/addresses)
 [2025-09-23 12:25:36] p95 budget: 1200ms | this run: 3ms
 
-
-
-C:\Users\Hp\Desktop>python probe_test.py
