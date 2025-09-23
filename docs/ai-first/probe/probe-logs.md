@@ -1,27 +1,3 @@
-C:\Users\Hp\Desktop>python probe_test.py
----
-
-## Probe Explanation
-
-### Typeahead
-- **Goal tested:** Can typeahead return valid SKU suggestions within the 300 ms budget?  
-- **Result:** All four sample queries returned catalog SKUs in **1–3 ms** (well under p95).  
-- **Observation:** Cache started cold (MISS) but results were cached for 15 m, confirming cache strategy.  
-- **Conclusion:** Latency and fallback (catalog lookup) are feasible.
-
-### Support Assistant
-- **Goal tested:** Can the assistant resolve order-status queries while respecting PII rules?  
-- **Result:** Queries successfully hit the `order-status` API and produced grounded natural-language replies in **3–5 ms** (far below 1200 ms target).  
-- **Observation:** PII redaction worked (only order_id left app, names/addresses stripped). Logs store only hashed IDs.  
-- **Conclusion:** Assistant is both performant and privacy-compliant.
-
-### Overall
-The probes confirm that both selected touchpoints (Typeahead + Support Assistant)  
-- Meet or beat their **latency budgets**.  
-- Respect **guardrails and PII policies**.  
-- Produce outputs that match the design’s **happy paths**.  
-
-
 # Typeahead Search Suggestion Probe Log
 
 [2025-09-23 12:25:36] Input: "laptop"
@@ -79,3 +55,24 @@ The probes confirm that both selected touchpoints (Typeahead + Support Assistant
 [2025-09-23 12:25:36] Logging: stored order_id hash=59fdcc0312f13ba ; dropped PII (names/addresses)
 [2025-09-23 12:25:36] p95 budget: 1200ms | this run: 3ms
 
+
+
+
+## Probe Explanation
+### Typeahead
+- **Goal tested:** Can typeahead return valid SKU suggestions within the 300 ms budget?  
+- **Result:** All four sample queries returned catalog SKUs in **1–3 ms** (well under p95).  
+- **Observation:** Cache started cold (MISS) but results were cached for 15 m, confirming cache strategy.  
+- **Conclusion:** Latency and fallback (catalog lookup) are feasible.
+
+### Support Assistant
+- **Goal tested:** Can the assistant resolve order-status queries while respecting PII rules?  
+- **Result:** Queries successfully hit the `order-status` API and produced grounded natural-language replies in **3–5 ms** (far below 1200 ms target).  
+- **Observation:** PII redaction worked (only order_id left app, names/addresses stripped). Logs store only hashed IDs.  
+- **Conclusion:** Assistant is both performant and privacy-compliant.
+
+### Overall
+The probes confirm that both selected touchpoints (Typeahead + Support Assistant)  
+- Meet or beat their **latency budgets**.  
+- Respect **guardrails and PII policies**.  
+- Produce outputs that match the design’s **happy paths**.  
